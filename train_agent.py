@@ -58,15 +58,15 @@ def pipeline_somente_treino(
 
     profiles = [
         {"nome": "Balanceado", "w1": 4.0, "w2": 3.0, "w3": 2.0, "w4": 2.0},
-        {"nome": "Foco_eMBB", "w1": 6.0, "w2": 2.0, "w3": 2.0, "w4": 2.0},
-        {"nome": "Missao_Critica", "w1": 2.0, "w2": 6.0, "w3": 2.0, "w4": 3.0},
+        #{"nome": "Foco_eMBB", "w1": 6.0, "w2": 2.0, "w3": 2.0, "w4": 2.0},
+        #{"nome": "Missao_Critica", "w1": 2.0, "w2": 6.0, "w3": 2.0, "w4": 3.0},
     ]
     
     # ATENÇÃO: Para rodar um de cada vez em dias diferentes, deixe apenas um aqui:
     # algorithms = ["TD3"]
     algorithms = ["SAC"]#, "PPO"]
-    train_seeds = [10, 20, 30]
-    #train_seeds = [10]
+    #train_seeds = [10, 20, 30]
+    train_seeds = [10]
 
     for algo in algorithms:
         for profile in profiles:
