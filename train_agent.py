@@ -9,6 +9,10 @@ import os
 import time
 import torch
 torch.set_num_threads(1)  # Limita as threads para não estourar a CPU e a RAM
+print(f"\n--- VERIFICAÇÃO DE HARDWARE ---")
+print(f"GPU Disponível? {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"Modelo da GPU: {torch.cuda.get_device_name(0)}\n")
 from pathlib import Path
 from typing import Optional
 
@@ -86,7 +90,7 @@ def pipeline_somente_treino(
                 
                 # Se der WinError de paginação novamente, reduza n_envs para 2 ou 1
                 train_env = make_vec_env(
-                    SGHaulEnv, n_envs=n_envs, env_kwargs={**env_kwargs, "max_steps": episode_max_steps},
+                    SGHaulEnv, n_envs=n_envs, env_kwargs={**env_kwargs, "max_steps": episode_max_steps, "calibration_path": "data/calibracao.json"},
                     vec_env_cls=SubprocVecEnv, seed=train_seed,
                 )
                 eval_env = Monitor(SGHaulEnv(**env_kwargs, max_steps=episode_max_steps, calibration_path="data/calibracao.json"))
